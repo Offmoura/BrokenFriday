@@ -1,0 +1,112 @@
+# ============================================================
+# BlackFriday Lab — .gitignore
+# Stack: Python/FastAPI · Node.js · Docker · PostgreSQL · Redis
+# ============================================================
+
+# ---------------------------
+# Notas / Documentos pessoais
+# ---------------------------
+BlackFriday Lab.md
+CHANGELOG.md
+MapaDaMina.md
+
+# ---------------------------
+# Variáveis de ambiente
+# ---------------------------
+.env
+.env.*
+!.env.example
+
+# ---------------------------
+# Python / FastAPI
+# ---------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ---------------------------
+# Node.js (frontend simples)
+# ---------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+.next/
+.nuxt/
+
+# ---------------------------
+# Docker
+# ---------------------------
+# Volumes locais montados
+postgres-data/
+redis-data/
+grafana-data/
+prometheus-data/
+rabbitmq-data/
+
+# ---------------------------
+# Dados / Seeds gerados
+# ---------------------------
+*.sql.bak
+*.dump
+
+# ---------------------------
+# Logs
+# ---------------------------
+*.log
+logs/
+*.log.*
+
+# ---------------------------
+# Editores e IDEs
+# ---------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ---------------------------
+# Testes de carga (outputs)
+# ---------------------------
+k6-results/
+*.html.report
+
+# ---------------------------
+# Certificados / Secrets
+# ---------------------------
+*.pem
+*.key
+*.crt
+*.p12
+
+# ---------------------------
+# Misc
+# ---------------------------
+.cache/
+tmp/
+.tmp/

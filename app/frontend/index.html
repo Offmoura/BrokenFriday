@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackFraude — Tudo pela metade do dobro!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo-area" id="logo-link">
+                <span class="logo-title">Broken Friday</span>
+                <span class="logo-subtitle">Tudo pela metade do dobro!</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#" class="nav-link active" id="nav-vitrine">Vitrine</a>
+                <!-- O carrinho é apenas uma transição para o checkout -->
+                <a href="#/checkout" class="nav-link" id="nav-checkout">Carrinho / Checkout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Views Container -->
+    <main>
+
+        <!-- VIEW 1: Vitrine de Produtos -->
+        <section id="vitrine-view" class="view-section active">
+            <!-- Hero Promo -->
+            <div class="hero-banner">
+                <h1 class="hero-title">A Maior Liquidação Simulada da Internet!</h1>
+                <p class="hero-subtitle">Descontos inacreditáveis de até -0%!</p>
+            </div>
+
+            <!-- Filtros e Busca -->
+            <div class="search-filter-bar">
+                <div class="search-input-wrapper">
+                    <input type="text" id="search-input" class="search-input" placeholder="Buscar produtos com desconto inflacionado...">
+                </div>
+                <select id="sort-select" class="sort-select">
+                    <option value="default">Relevância Artificial</option>
+                    <option value="price-asc">Menor Preço (Dobrado)</option>
+                    <option value="price-desc">Maior Preço (Metade)</option>
+                    <option value="most-sold">Mais Procurados por Robôs</option>
+                </select>
+            </div>
+
+            <!-- Lista de Produtos -->
+            <div class="products-grid" id="products-grid">
+                <!-- Inserido dinamicamente via JS -->
+                <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-secondary);">
+                    Carregando produtos superfaturados...
+                </div>
+            </div>
+
+            <!-- Paginação -->
+            <div class="pagination-container" id="pagination-container">
+                <!-- Inserido dinamicamente via JS -->
+            </div>
+        </section>
+
+
+        <!-- VIEW 2: Detalhes do Produto -->
+        <section id="produto-view" class="view-section">
+            <div class="product-detail-container" id="product-detail-content">
+                <!-- Inserido dinamicamente via JS -->
+            </div>
+        </section>
+
+
+        <!-- VIEW 3: Checkout / Pagamento -->
+        <section id="checkout-view" class="view-section">
+            <div class="checkout-grid">
+                <!-- Form de Checkout -->
+                <div class="checkout-card">
+                    <h2 class="checkout-title">Dados de "Pagamento"</h2>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label class="form-label" for="client-name">Nome Completo</label>
+                            <input type="text" id="client-name" class="form-input" required placeholder="Digite o nome impresso no cartão">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="client-email">E-mail para Spam</label>
+                            <input type="email" id="client-email" class="form-input" required placeholder="seu-email-que-vai-vazar@provedor.com">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="card-number">Cartão Fictício</label>
+                                <input type="text" id="card-number" class="form-input" required placeholder="4002 8922 1234 5678" pattern="[0-9\s]{13,19}">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="card-expiry">Validade</label>
+                                    <input type="text" id="card-expiry" class="form-input" required placeholder="MM/AA" pattern="(0[1-9]|1[0-2])\/[0-9]{2}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="card-cvv">CVV</label>
+                                    <input type="text" id="card-cvv" class="form-input" required placeholder="123" pattern="[0-9]{3,4}">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-action" style="width: 100%; margin-top: 1.5rem;" id="btn-submit-order">
+                            Confirmar Compra Pelo Dobro do Preço
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Resumo do Pedido -->
+                <div class="checkout-card" style="height: fit-content;">
+                    <h2 class="checkout-title">Carrinho</h2>
+                    <div id="checkout-summary-content">
+                        <!-- Inserido dinamicamente via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW 4: Pedido Confirmado -->
+        <section id="confirmado-view" class="view-section">
+            <div class="success-container">
+                <div class="success-icon-wrapper">
+                    <span class="success-icon">✓</span>
+                </div>
+                <h2 class="success-title">Pedido Registrado!</h2>
+                <p class="success-subtitle">Sua transação foi enviada para processamento fictício de alta escala.</p>
+                
+                <div class="order-details-box">
+                    <div class="order-detail-row">
+                        <span>ID do Pedido:</span>
+                        <strong id="summary-order-id">UUID-CARREGANDO...</strong>
+                    </div>
+                    <div class="order-detail-row">
+                        <span>Produto Adquirido:</span>
+                        <strong id="summary-product-name">Carregando...</strong>
+                    </div>
+                    <div class="order-detail-row">
+                        <span>Valor "Pago":</span>
+                        <strong id="summary-total-price">R$ 0,00</strong>
+                    </div>
+                    <div class="order-detail-row">
+                        <span>Status de Processamento:</span>
+                        <span id="summary-order-status" class="order-status-badge status-pending">Aguardando Fila</span>
+                    </div>
+                </div>
+
+                <a href="#" class="btn-action" style="display: inline-block;">Voltar às Compras Sem Sentido</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2026 BlackFraude E-Commerce Simulator S/A.</p>
+        <p class="footer-warning">Atenção: Este site é 100% fictício, projetado para fins didáticos de engenharia de confiabilidade (SRE) e DevOps.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
