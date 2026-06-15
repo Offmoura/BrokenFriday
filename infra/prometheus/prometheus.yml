@@ -1,0 +1,17 @@
+  global:
+    scrape_interval: 5s  # Coleta métricas a cada 5 segundos
+
+  scrape_configs:
+    - job_name: 'fastapi-app'
+      static_configs:
+      - targets: ['api:8000']  # Nome do container na rede interna
+
+    - job_name: 'postgres'
+      static_configs:
+      - targets: ['postgres-exporter:9187']  # Opcional: postgres_exporter
+
+    - job_name: 'redis'
+      static_configs:
+      - targets: ['redis-exporter:9121']     # Opcional: redis_exporter
+      networks:
+      - blackfriday_net

@@ -1,0 +1,91 @@
+services:
+
+# Banco de dados
+  postgres: 
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=brokenfridaylab
+    volumes:
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./infra/postgres/data:/var/lib/postgresql/data
+    networks:
+      - blackfriday_net
+
+# Cache em memória
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass "sua_senha_aqui"
+    networks:
+      - blackfriday_net
+
+#Orquestrador de tarefas assíncronas
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    networks:
+      - blackfriday_net
+
+#Coletor de métricas
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+#Dashboard para visualização de métricas
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana-data:/var/lib/grafana
+    networks:
+      - blackfriday_net
+
+#API do Broken Friday
+  api:
+    build: ./app/api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://app_user:secure_app_password_123!@postgres:5432/brokenfridaylab
+      - REDIS_URL=redis://:sua_senha_aqui@redis:6379/0
+      - RABBITMQ_URL=amqp://admin:admin@rabbitmq:5672/
+    networks:
+      - blackfriday_net
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+
+#Load balancer e frontend
+nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80" # O aluno vai acessar `http://localhost`
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./app/frontend:/usr/share/nginx/html
+    networks:
+      - blackfriday_net
+    depends_on:
+      - api
+
+#Rede virtual privada
+networks:
+  blackfriday_net:
+   driver: bridge
