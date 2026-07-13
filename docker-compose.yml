@@ -43,6 +43,13 @@ services:
       - "9090:9090"
     volumes:
       - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - blackfriday_net
+    depends_on:
+      - api
+      - postgres
+      - redis
+      - rabbitmq
 
 #Dashboard para visualização de métricas
   grafana:
@@ -73,10 +80,10 @@ services:
       - rabbitmq
 
 #Load balancer e frontend
-nginx:
+  nginx:
     image: nginx:alpine
     ports:
-      - "80:80" # O aluno vai acessar `http://localhost`
+      - "80:80"
     volumes:
       - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./app/frontend:/usr/share/nginx/html
