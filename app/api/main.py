@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from typing import List
 import logging
 
-from . import models, schemas, database
+import models, schemas, database
 
 # Initialize logging securely
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")

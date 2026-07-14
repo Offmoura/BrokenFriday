@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
-from .config import settings
+from config import settings
 
 # engine setup with SQLite fallback check (for check_same_thread)
 connect_args = {}

@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
 import datetime
-from .database import Base
+from database import Base
 
 class Product(Base):
     __tablename__ = "products"
