@@ -1,0 +1,71 @@
+name: 🔍 CI — Depuração Básica
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # ─────────────────────────────────────────
+  # Job 1: Valida o docker-compose.yml
+  # ─────────────────────────────────────────
+  validate-compose:
+    name: Validar docker-compose.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Criar arquivos de config necessários
+        run: |
+          mkdir -p infra/prometheus infra/nginx infra/postgres
+          # Prometheus mínimo para o compose não quebrar na validação
+          echo -e "global:\n  scrape_interval: 5s\nscrape_configs:\n  - job_name: 'api'\n    static_configs:\n      - targets: ['api:8000']" > infra/prometheus/prometheus.yml
+          # nginx mínimo
+          echo -e "events {}\nhttp {\n  server {\n    listen 80;\n    location / { root /usr/share/nginx/html; }\n  }\n}" > infra/nginx/nginx.conf
+
+      - name: Validar sintaxe do docker-compose.yml
+        run: docker compose config --quiet
+
+  # ─────────────────────────────────────────
+  # Job 2: Build da imagem da API
+  # ─────────────────────────────────────────
+  build-api:
+    name: Build da API (Docker)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Build da imagem da API
+        run: docker build -t brokenfriday-api:ci ./app/api
+
+      - name: Verificar se a imagem foi criada
+        run: docker image inspect brokenfriday-api:ci --format "✅ Imagem criada com sucesso"
+
+  # ─────────────────────────────────────────
+  # Job 3: Lint básico do Python
+  # ─────────────────────────────────────────
+  lint-python:
+    name: Lint Python (flake8)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar flake8
+        run: pip install flake8
+
+      - name: Rodar lint na API
+        run: |
+          flake8 app/api/ \
+            --max-line-length=120 \
+            --exclude=__pycache__ \
+            --count \
+            --statistics
