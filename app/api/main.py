@@ -4,6 +4,9 @@ from sqlalchemy.orm import Session
 from typing import List
 import logging
 
+from prometheus_fastapi_instrumentator import Instrumentator
+Instrumentator().instrument(app).expose(app)
+
 import models, schemas, database
 
 # Initialize logging securely
