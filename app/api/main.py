@@ -1,11 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 from sqlalchemy.orm import Session
 from typing import List
 import logging
-
-from prometheus_fastapi_instrumentator import Instrumentator
-Instrumentator().instrument(app).expose(app)
 
 import models, schemas, database
 
@@ -42,6 +40,10 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+# Expõe /metrics para o Prometheus coletar
+# Deve ser chamado APÓS a criação do app e configuração do middleware
+Instrumentator().instrument(app).expose(app)
 
 # --------------------------------------------------------------------
 # ENDPOINTS
