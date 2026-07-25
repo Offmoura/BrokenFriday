@@ -63,6 +63,7 @@ dist/
 # ---------------------------
 # Volumes locais montados
 postgres-data/
+infra/postgres/data/
 redis-data/
 grafana-data/
 prometheus-data/

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlackFraude — Tudo pela metade do dobro!</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- Header / Nav -->
@@ -37,12 +39,13 @@
             <!-- Filtros e Busca -->
             <div class="search-filter-bar">
                 <div class="search-input-wrapper">
-                    <input type="text" id="search-input" class="search-input" placeholder="Buscar produtos com desconto inflacionado...">
+                    <input type="text" id="search-input" class="search-input"
+                        placeholder="Buscar produtos com desconto inflacionado...">
                 </div>
                 <select id="sort-select" class="sort-select">
                     <option value="default">Relevância Artificial</option>
-                    <option value="price-asc">Menor Preço (Dobrado)</option>
-                    <option value="price-desc">Maior Preço (Metade)</option>
+                    <option value="price-asc">Menor Preço (Super desconto)</option>
+                    <option value="price-desc">Maior Preço (Ultra desconto)</option>
                     <option value="most-sold">Mais Procurados por Robôs</option>
                 </select>
             </div>
@@ -51,7 +54,7 @@
             <div class="products-grid" id="products-grid">
                 <!-- Inserido dinamicamente via JS -->
                 <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-secondary);">
-                    Carregando produtos superfaturados...
+                    Carregando produtos com excelentes descontos...
                 </div>
             </div>
 
@@ -79,29 +82,35 @@
                     <form id="checkout-form">
                         <div class="form-group">
                             <label class="form-label" for="client-name">Nome Completo</label>
-                            <input type="text" id="client-name" class="form-input" required placeholder="Digite o nome impresso no cartão">
+                            <input type="text" id="client-name" class="form-input" required
+                                placeholder="Digite o nome impresso no cartão">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="client-email">E-mail para Spam</label>
-                            <input type="email" id="client-email" class="form-input" required placeholder="seu-email-que-vai-vazar@provedor.com">
+                            <input type="email" id="client-email" class="form-input" required
+                                placeholder="seu-email-que-vai-vazar@provedor.com">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label" for="card-number">Cartão Fictício</label>
-                                <input type="text" id="card-number" class="form-input" required placeholder="4002 8922 1234 5678" pattern="[0-9\s]{13,19}">
+                                <input type="text" id="card-number" class="form-input" required
+                                    placeholder="4002 8922 1234 5678" pattern="[0-9\s]{13,19}">
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label" for="card-expiry">Validade</label>
-                                    <input type="text" id="card-expiry" class="form-input" required placeholder="MM/AA" pattern="(0[1-9]|1[0-2])\/[0-9]{2}">
+                                    <input type="text" id="card-expiry" class="form-input" required placeholder="MM/AA"
+                                        pattern="(0[1-9]|1[0-2])\/[0-9]{2}">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="card-cvv">CVV</label>
-                                    <input type="text" id="card-cvv" class="form-input" required placeholder="123" pattern="[0-9]{3,4}">
+                                    <input type="text" id="card-cvv" class="form-input" required placeholder="123"
+                                        pattern="[0-9]{3,4}">
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn-action" style="width: 100%; margin-top: 1.5rem;" id="btn-submit-order">
+                        <button type="submit" class="btn-action" style="width: 100%; margin-top: 1.5rem;"
+                            id="btn-submit-order">
                             Confirmar Compra Pelo Dobro do Preço
                         </button>
                     </form>
@@ -125,8 +134,9 @@
                     <span class="success-icon">✓</span>
                 </div>
                 <h2 class="success-title">Pedido Registrado!</h2>
-                <p class="success-subtitle">Sua transação foi enviada para processamento fictício de alta escala.</p>
-                
+                <p class="success-subtitle">Sua transação foi concluida com sucesso, agradecemos pelo seu dinheiro bem
+                    gasto.</p>
+
                 <div class="order-details-box">
                     <div class="order-detail-row">
                         <span>ID do Pedido:</span>
@@ -146,7 +156,7 @@
                     </div>
                 </div>
 
-                <a href="#" class="btn-action" style="display: inline-block;">Voltar às Compras Sem Sentido</a>
+                <a href="#" class="btn-action" style="display: inline-block;">Voltar às Compras por impulso</a>
             </div>
         </section>
 
@@ -154,10 +164,12 @@
 
     <!-- Footer -->
     <footer>
-        <p class="footer-text">© 2026 BlackFraude E-Commerce Simulator S/A.</p>
-        <p class="footer-warning">Atenção: Este site é 100% fictício, projetado para fins didáticos de engenharia de confiabilidade (SRE) e DevOps.</p>
+        <p class="footer-text">© 2026 BlackFraude E-Commerce Simulator S/A. Se tu não comprou o desconto foi maior</p>
+        <p class="footer-warning">Atenção: Este site é 100% fictício, projetado para fins didáticos de engenharia de
+            confiabilidade (SRE) e DevOps.</p>
     </footer>
 
     <script src="app.js"></script>
 </body>
+
 </html>

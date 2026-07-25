@@ -16,93 +16,21 @@ const state = {
 };
 
 // SVG Mocks estéticos de produtos para o site "BlackFraude"
-const getProductSVG = (type, primaryColor, secondaryColor) => {
-    const svgs = {
-        console: `
-            <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="grad-${type}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:${primaryColor};stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:${secondaryColor};stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="100" height="100" fill="#100c18"/>
-                <rect x="25" y="20" width="50" height="60" rx="8" fill="url(#grad-${type})" opacity="0.9"/>
-                <rect x="30" y="25" width="40" height="5" rx="2" fill="#0c0a0f" opacity="0.5"/>
-                <circle cx="50" cy="65" r="10" fill="#0c0a0f" opacity="0.6"/>
-                <circle cx="50" cy="65" r="4" fill="${secondaryColor}"/>
-                <line x1="25" y1="50" x2="75" y2="50" stroke="#0c0a0f" stroke-width="2" opacity="0.3"/>
-            </svg>
-        `,
-        gpu: `
-            <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="grad-${type}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:${primaryColor};stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:${secondaryColor};stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="100" height="100" fill="#100c18"/>
-                <rect x="15" y="30" width="70" height="40" rx="4" fill="url(#grad-${type})" opacity="0.9"/>
-                <circle cx="40" cy="50" r="14" fill="#0c0a0f" opacity="0.7"/>
-                <circle cx="40" cy="50" r="12" fill="none" stroke="${primaryColor}" stroke-width="2"/>
-                <circle cx="70" cy="50" r="8" fill="#0c0a0f" opacity="0.7"/>
-                <path d="M 15 35 L 85 35 M 15 65 L 85 65" stroke="#0c0a0f" stroke-width="3" opacity="0.4"/>
-            </svg>
-        `,
-        chair: `
-            <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="grad-${type}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:${primaryColor};stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:${secondaryColor};stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="100" height="100" fill="#100c18"/>
-                <!-- Costas -->
-                <rect x="35" y="15" width="30" height="40" rx="6" fill="url(#grad-${type})" opacity="0.9"/>
-                <!-- Assento -->
-                <rect x="30" y="52" width="40" height="8" rx="3" fill="url(#grad-${type})"/>
-                <!-- Base e Apoios -->
-                <rect x="47" y="60" width="6" height="18" fill="#2e2540"/>
-                <path d="M 35 78 L 65 78 M 40 78 L 30 85 M 60 78 L 70 85" stroke="#2e2540" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-        `,
-        headset: `
-            <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="grad-${type}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:${primaryColor};stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:${secondaryColor};stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="100" height="100" fill="#100c18"/>
-                <!-- Arco -->
-                <path d="M 25 50 A 25 25 0 0 1 75 50" fill="none" stroke="url(#grad-${type})" stroke-width="6" stroke-linecap="round"/>
-                <!-- Conchas -->
-                <rect x="20" y="45" width="12" height="20" rx="4" fill="url(#grad-${type})"/>
-                <rect x="68" y="45" width="12" height="20" rx="4" fill="url(#grad-${type})"/>
-                <!-- Microfone -->
-                <path d="M 26 60 Q 35 75 48 70" fill="none" stroke="#2e2540" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-        `,
-        generic: `
-            <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="grad-${type}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:${primaryColor};stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:${secondaryColor};stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="100" height="100" fill="#100c18"/>
-                <polygon points="50,20 80,40 80,75 50,90 20,75 20,40" fill="url(#grad-${type})" opacity="0.85"/>
-                <line x1="50" y1="20" x2="50" y2="90" stroke="#0c0a0f" stroke-width="1.5" opacity="0.5"/>
-                <line x1="20" y1="40" x2="80" y2="40" stroke="#0c0a0f" stroke-width="1.5" opacity="0.5"/>
-            </svg>
-        `
-    };
-    return svgs[type] || svgs.generic;
+const PRODUCT_IMAGES = {
+    console: 'images/console.png',
+    gpu:     'images/gpu.png',
+    chair:   'images/chair.png',
+    headset: 'images/headset.png',
+    keyboard:'images/keyboard.png',
+    mouse:   'images/mouse.png',
+    generic: 'images/keyboard.png',  // fallback
 };
+
+const getProductImage = (type) => {
+    const src = PRODUCT_IMAGES[type] || PRODUCT_IMAGES.generic;
+    return `<img src="${src}" alt="${type}" class="product-img" loading="lazy" onerror="this.style.display='none'">`;
+};
+
 
 // Produtos padrão para mock e fallback caso a API não responda
 const MOCK_PRODUCTS = [
@@ -220,7 +148,7 @@ async function router() {
     const hash = window.location.hash || '#';
     const mainViews = document.querySelectorAll('.view-section');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     // Desativa todas as views
     mainViews.forEach(v => v.classList.remove('active'));
     navLinks.forEach(l => l.classList.remove('active'));
@@ -229,7 +157,7 @@ async function router() {
     if (hash.startsWith('#/produto/')) {
         const productId = hash.split('#/produto/')[1];
         document.getElementById('produto-view').classList.add('active');
-        
+
         await renderProductDetail(productId);
         return;
     }
@@ -243,7 +171,7 @@ async function router() {
             const prod = await fetchProductById(prodId);
             if (prod) state.cartProduct = prod;
         }
-        
+
         document.getElementById('checkout-view').classList.add('active');
         document.getElementById('nav-checkout').classList.add('active');
         renderCheckout();
@@ -255,7 +183,7 @@ async function router() {
         const params = new URLSearchParams(hash.split('?')[1] || '');
         const orderId = params.get('orderId');
         const prodId = params.get('produto');
-        
+
         document.getElementById('confirmado-view').classList.add('active');
         renderOrderConfirmation(orderId, prodId);
         return;
@@ -278,7 +206,7 @@ async function renderVitrine() {
     grid.innerHTML = '';
 
     // Filtragem por busca (case-insensitive)
-    let filtered = state.products.filter(p => 
+    let filtered = state.products.filter(p =>
         p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(state.searchQuery.toLowerCase())
     );
@@ -314,12 +242,12 @@ async function renderVitrine() {
             stockBadge = `<span class="badge-stock badge-low-stock">Apenas ${p.stock} Restantes!</span>`;
         }
 
-        // SVG dinâmico elegante para representar o produto
-        const svgContent = getProductSVG(p.type || 'generic', p.primary_color || '#ff007f', p.secondary_color || '#00f0ff');
+        // Imagem do produto a partir dos assets locais
+        const imgContent = getProductImage(p.type || 'generic');
 
         card.innerHTML = `
             <div class="product-image-container">
-                ${svgContent}
+                ${imgContent}
                 ${stockBadge}
             </div>
             <div class="product-details">
@@ -346,7 +274,7 @@ function renderPagination() {
         <button class="pagination-btn">2</button>
         <button class="pagination-btn">3</button>
     `;
-    
+
     // Adiciona listener cosmético para animação de clique
     container.querySelectorAll('.pagination-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -379,11 +307,11 @@ async function renderProductDetail(id) {
             stockBadge = `<span class="badge-stock badge-low-stock">Restam apenas ${prod.stock} unidades!</span>`;
         }
 
-        const svgContent = getProductSVG(prod.type || 'generic', prod.primary_color || '#ff007f', prod.secondary_color || '#00f0ff');
+        const imgContent = getProductImage(prod.type || 'generic');
 
         content.innerHTML = `
             <div class="detail-gallery">
-                ${svgContent}
+                ${imgContent}
             </div>
             <div class="detail-info">
                 <h1 class="detail-title">${prod.name}</h1>
@@ -504,10 +432,10 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
 // RENDER 4: Pedido Confirmado + Polling de fila RabbitMQ
 async function renderOrderConfirmation(orderId, prodId) {
     const prod = await fetchProductById(prodId);
-    
+
     document.getElementById('summary-order-id').innerText = orderId || "UUID-NÃO-GERADO";
     document.getElementById('summary-product-name').innerText = prod ? prod.name : "Produto Desconhecido";
-    
+
     const value = prod ? prod.price * 1.15 : 0;
     document.getElementById('summary-total-price').innerText = formatCurrency(value);
 
@@ -518,11 +446,11 @@ async function renderOrderConfirmation(orderId, prodId) {
     // LAB 4: Simulação de processamento da Fila de Mensagens (RabbitMQ/Worker)
     // O frontend faz polling na API para verificar status. Se a API estiver offline ou simular falha:
     let attempts = 0;
-    
+
     state.pollingIntervalId = setInterval(async () => {
         attempts++;
         console.log(`[Polling Fila] Verificando status do pedido ${orderId}... (tentativa ${attempts})`);
-        
+
         try {
             const res = await fetch(`${API_BASE_URL}/pedidos/${orderId}`);
             if (res.ok) {
