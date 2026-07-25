@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from typing import Optional, Union
+from uuid import UUID
 from datetime import datetime
 
 class ProductBase(BaseModel):
@@ -25,7 +26,8 @@ class OrderCreateRequest(BaseModel):
     valor_pago: float = Field(..., gt=0)
 
 class OrderResponse(BaseModel):
-    id: str
+    id: Union[str, UUID]
+
     product_id: int
     customer_name: str
     customer_email: EmailStr

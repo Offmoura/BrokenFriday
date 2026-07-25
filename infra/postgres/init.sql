@@ -1,12 +1,12 @@
 -- Schema do banco de dados para o BlackFriday Lab
 
 -- 1. Criação da role/user para a aplicação sob o Princípio do Menor Privilégio
--- (O DB 'blackfriday' será criado via variáveis de ambiente do postgres no docker-compose)
+-- (O DB 'brokenfridaylab' será criado via variáveis de ambiente do postgres no docker-compose)
 CREATE USER app_user WITH PASSWORD 'secure_app_password_123!';
 
 -- 2. Revogando permissões padrão do schema public
 REVOKE CREATE ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON DATABASE blackfriday FROM PUBLIC;
+REVOKE ALL ON DATABASE brokenfridaylab FROM PUBLIC;
 
 -- 3. Criação das tabelas
 CREATE TABLE products (
@@ -36,7 +36,7 @@ CREATE INDEX idx_products_name ON products(name);
 CREATE INDEX idx_orders_product_id ON orders(product_id);
 
 -- 5. Conceder permissões apenas de DML (Data Manipulation Language) para a app_user
-GRANT CONNECT ON DATABASE blackfriday TO app_user;
+GRANT CONNECT ON DATABASE brokenfridaylab TO app_user;
 GRANT USAGE ON SCHEMA public TO app_user;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE products TO app_user;
 GRANT SELECT, INSERT, UPDATE ON TABLE orders TO app_user; -- Aplicação não deveria deletar pedidos
