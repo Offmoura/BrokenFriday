@@ -59,7 +59,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
-      - ./grafana-data:/var/lib/grafana
+      - grafana_data:/var/lib/grafana
     networks:
       - blackfriday_net
 
@@ -95,4 +95,7 @@ services:
 #Rede virtual privada
 networks:
   blackfriday_net:
-   driver: bridge
+    driver: bridge
+
+volumes:
+  grafana_data:
