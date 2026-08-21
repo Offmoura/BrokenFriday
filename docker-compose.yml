@@ -92,6 +92,18 @@ services:
     depends_on:
       - api
 
+# Consumer Worker RabbitMQ
+  worker:
+    build: ./app/worker
+    environment:
+      - DATABASE_URL=postgresql://app_user:secure_app_password_123!@postgres:5432/brokenfridaylab
+      - RABBITMQ_URL=amqp://admin:admin@rabbitmq:5672/
+    networks:
+      - blackfriday_net
+    depends_on:
+      - postgres
+      - rabbitmq
+
 #Rede virtual privada
 networks:
   blackfriday_net:

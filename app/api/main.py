@@ -22,6 +22,27 @@ app = FastAPI(
     version="1.0.0"
 )
 
+from config import settings
+
+def publish_order_event(order_id: str):
+    """Publica evento de pedido criado no RabbitMQ."""
+    try:
+        import pika
+        import json
+        params = pika.URLParameters(settings.rabbitmq_url)
+        connection = pika.BlockingConnection(params)
+        channel = connection.channel()
+        channel.queue_declare(queue="orders_queue", durable=True)
+        channel.basic_publish(
+            exchange="",
+            routing_key="orders_queue",
+            body=json.dumps({"order_id": order_id}),
+            properties=pika.BasicProperties(delivery_mode=2)
+        )
+        connection.close()
+    except Exception as e:
+        logger.warning(f"Nao foi possivel publicar pedido no RabbitMQ: {e}")
+
 # STRICT CORS Policy
 # Only allow specific origins (in real world, strict origins. Here we allow localhost variations)
 origins = [
@@ -113,11 +134,10 @@ def create_order(order: schemas.OrderCreateRequest, db: Session = Depends(databa
         db.add(new_order)
         db.commit()
         db.refresh(new_order)
-        
-        # Aqui, em um cenário real (e para o Lab 4), publicaríamos a mensagem no RabbitMQ.
-        # Por simplicidade nesta versão base, se RabbitMQ não está configurado, podemos 
-        # apenas retornar a ordem pendente. Um worker ou processo simulado confirmaria a ordem depois.
-        
+
+        # Publica o evento no RabbitMQ para o worker processar
+        publish_order_event(new_order.id)
+
         return new_order
         
     except HTTPException:

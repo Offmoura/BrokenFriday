@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 class Settings(BaseSettings):
     # Fallback to an in-memory SQLite if not provided, but issue a severe warning
     database_url: str = "sqlite:///./test.db"
+    rabbitmq_url: str = "amqp://admin:admin@rabbitmq:5672/"
     
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
